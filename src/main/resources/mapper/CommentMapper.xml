@@ -136,4 +136,22 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCommentsByEntity" resultType="com.nowcoder.community.entity.Comment">
+    select <include refid="Base_Column_List"/>,
+        <include refid="Blob_Column_List"/>
+    from comment
+    where status = 0
+    and entity_type = #{entityType}
+    and entity_id = #{entityId}
+    order by create_time asc
+    limit #{offset}, #{limit}
+  </select>
+  <select id="selectCountsByEntity" resultType="int">
+      select count(id)
+      from comment
+      where status = 0
+        and entity_type = #{entityType}
+        and entity_id = #{entityId}
+  </select>
 </mapper>

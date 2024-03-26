@@ -20,8 +20,14 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    @Select("SELECT * FROM  user where id = #{id}")
+    @Select({"SELECT * FROM  user WHERE id = #{id}"})
     @ResultMap("BaseResultMap")
     User selectById(int id);
+
+    @Select("SELECT * FROM user WHERE username=#{username}")
+    @ResultMap("BaseResultMap")
+    User selectByUsername(String username);
+
+    User selectByEmail(String email);
 
 }

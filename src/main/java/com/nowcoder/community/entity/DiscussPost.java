@@ -1,13 +1,21 @@
 package com.nowcoder.community.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Document(indexName = "discusspost", type = "_doc", shards = 6, replicas = 2)
 public class DiscussPost implements Serializable {
+    @Id
     private Integer id;
 
+    @Field(type = FieldType.Integer)
     private Integer userId;
-
+    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_smart")
     private String title;
 
     /**
@@ -15,21 +23,24 @@ public class DiscussPost implements Serializable {
      *
      * @mbg.generated
      */
-    private Integer type;
+    @Field(type = FieldType.Integer)
+    private Integer type = 0;
 
     /**
      * 0-正常; 1-精华; 2-拉黑;
      *
      * @mbg.generated
      */
-    private Integer status;
-
+    @Field(type = FieldType.Integer)
+    private Integer status = 0;
+    @Field(type = FieldType.Date)
     private Date createTime;
+    @Field(type = FieldType.Integer)
+    private Integer commentCount = 0;
+    @Field(type = FieldType.Double)
+    private Double score = 0.0;
 
-    private Integer commentCount;
-
-    private Double score;
-
+    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_smart")
     private String content;
 
     private static final long serialVersionUID = 1L;

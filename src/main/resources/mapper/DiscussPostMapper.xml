@@ -50,6 +50,12 @@
         </if>
 
     </select>
+    <select id="selectByIdDiscussPost" resultType="com.nowcoder.community.entity.DiscussPost">
+        select<include refid="Base_Column_List"/>,
+        <include refid="Blob_Column_List"/>
+        from discuss_post
+        where id=#{id}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from discuss_post
