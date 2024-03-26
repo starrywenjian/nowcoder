@@ -12,7 +12,7 @@ public class Comment implements Serializable {
 
     private Integer entityId;
 
-    private Integer targetId;
+    private Integer targetId = 0;
 
     private Integer status;
 
